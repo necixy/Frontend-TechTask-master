@@ -1,11 +1,28 @@
 import React from 'react';
+import styled from '@emotion/styled';
+
 import Input from '../../ui/input/Input';
+import logoSvg from '../../assets/home-24-logo.svg';
+
+const HeaderContainer = styled.header`
+  grid-area: header;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+`;
+
+const Logo = styled.img`
+  height: 32px;
+  vertical-align: middle;
+`;
 
 const Header: React.FC = () => (
-  <div className={'header'}>
-    <strong>home24</strong>
+  <HeaderContainer>
+    <Logo src={logoSvg} alt="Logo" />
     <Input placeholder={'Search'} />
-  </div>
+  </HeaderContainer>
 );
 
 export default Header;

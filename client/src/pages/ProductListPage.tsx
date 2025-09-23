@@ -1,14 +1,19 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { useCategories } from '../hooks/useCategories';
 import PageLayout from '../layout/page-layout/PageLayout';
 import Sidebar from '../layout/sidebar/Sidebar';
 import ArticleGrid from '../product/article-grid/ArticleGrid';
 import Loading from '../ui/loading/Loading';
 import Error from '../ui/error/Error';
-import './ProductListPage.css';
 
 const DEFAULT_CATEGORY_ID = '156126';
 const DEFAULT_FIRST = 100;
+
+const Content = styled.div`
+  grid-area: content;
+  grid-column: span 2;
+`;
 
 const ProductListPage: React.FC = () => {
   const { categories, articles, loading, error } = useCategories(
@@ -29,7 +34,7 @@ const ProductListPage: React.FC = () => {
         )
       }
       content={
-        <div className={'content'}>
+        <Content>
           {categories.length ? (
             <h1>
               {categories[0].name}
@@ -39,7 +44,7 @@ const ProductListPage: React.FC = () => {
             <Loading />
           )}
           <ArticleGrid articles={articles} />
-        </div>
+        </Content>
       }
     />
   );
