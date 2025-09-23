@@ -1,23 +1,18 @@
 import React from 'react';
 
-import { Category, Article } from './types';
+import { Article } from './types';
 import './ProductList.css';
+import { useCategories } from './hooks/useCategories';
 
-var intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
-
-export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
-  style: intlNumberFormatValues[1],
-  currency: intlNumberFormatValues[2],
+export const formatter = new Intl.NumberFormat('de-DE', {
+  style: 'currency',
+  currency: 'EUR',
 });
-
-type State = {
-  categories: Category[];
-};
 
 export var ArticleCard = ({ article }: { article: Article }) => {
   return (
     <div className={'article'}>
-      <img src={article.images[0].path} />
+      <img src={article.images[0].path} alt={article.name} />
       <div>{article.name}</div>
       <div>{formatter.format(article.prices.regular.value / 100)}</div>
       <section role="button">Add to cart</section>
@@ -25,116 +20,76 @@ export var ArticleCard = ({ article }: { article: Article }) => {
   );
 };
 
-class ArticleList extends React.Component {
-  state: State = {
-    categories: [],
-  };
+const DEFAULT_CATEGORY_ID = '156126';
+const DEFAULT_FIRST = 100;
 
-  componentDidMount() {
-    var xhr = new XMLHttpRequest();
+const ArticleList: React.FC = () => {
+  const { categories, articles, loading, error } = useCategories(
+    DEFAULT_CATEGORY_ID,
+    DEFAULT_FIRST
+  );
 
-    xhr.open('POST', '/graphql');
-    xhr.setRequestHeader('Content-Type', 'application/json');
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-    xhr.send(
-      JSON.stringify({
-        query: `{
-        categories: productLists(ids: "156126", locale: de_DE) {
-          name
-          articleCount
-          childrenCategories: childrenProductLists {
-            list {
-              name
-              urlPath
-            }
-          }
-          categoryArticles: articlesList(first: 50) {
-            articles {
-              name
-              variantName
-              prices {
-                currency
-                regular {
-                  value
-                }
+  return (
+    <div className={'page'}>
+      <div className={'header'}>
+        <strong>home24</strong>
+        <input placeholder={'Search'} />
+      </div>
+
+      <div className={'sidebar'}>
+        <h3>Kategorien</h3>
+        {categories.length ? (
+          <ul>
+            {categories[0].childrenCategories.list.map(
+              (
+                {
+                  name,
+                  urlPath,
+                  id,
+                }: { name: string; urlPath: string; id: string },
+                index: number
+              ) => {
+                return (
+                  <li key={index}>
+                    <a href={`/${urlPath}`}>
+                      {name} (id: {id})
+                    </a>
+                  </li>
+                );
               }
-              images(
-                format: WEBP
-                maxWidth: 200
-                maxHeight: 200
-                limit: 1
-              ) {
-                path
-              }
-            }
-          }
-        }
-      }`,
-      })
-    );
+            )}
+          </ul>
+        ) : (
+          'Loading...'
+        )}
+      </div>
 
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        var response = JSON.parse(xhr.response);
-
-        this.setState({ categories: response.data.categories });
-      }
-    };
-  }
-
-  render() {
-    var articles = this.state.categories.map((category) => {
-      return category.categoryArticles.articles.map((article) => {
-        return <ArticleCard article={article} />;
-      });
-    });
-
-    return (
-      <div className={'page'}>
-        <div className={'header'}>
-          <strong>home24</strong>
-          <input placeholder={'Search'} />
-        </div>
-
-        <div className={'sidebar'}>
-          <h3>Kategorien</h3>
-          {this.state.categories.length ? (
-            <ul>
-              {this.state.categories[0].childrenCategories.list.map(
-                ({ name, urlPath }) => {
-                  return (
-                    <li>
-                      <a href={`/${urlPath}`}>{name}</a>
-                    </li>
-                  );
-                }
-              )}
-            </ul>
-          ) : (
-            'Loading...'
-          )}
-        </div>
-
-        <div className={'content'}>
-          {this.state.categories.length ? (
-            <h1>
-              {this.state.categories[0].name}
-              <small> ({this.state.categories[0].articleCount})</small>
-            </h1>
-          ) : (
-            'Loading...'
-          )}
-          <div className={'articles'}>{articles}</div>
-        </div>
-
-        <div className={'footer'}>
-          Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und
-          Versandkosten.
+      <div className={'content'}>
+        {categories.length ? (
+          <h1>
+            {categories[0].name}
+            <small> ({categories[0].articleCount})</small>
+          </h1>
+        ) : (
+          'Loading...'
+        )}
+        <div className={'articles'}>
+          {articles.map((article: Article, index: number) => (
+            <ArticleCard key={`${article.name}-${index}`} article={article} />
+          ))}
         </div>
       </div>
-    );
-  }
-}
+
+      <div className={'footer'}>
+        Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und
+        Versandkosten.
+      </div>
+    </div>
+  );
+};
 
 var PLP = () => {
   return <ArticleList />;
