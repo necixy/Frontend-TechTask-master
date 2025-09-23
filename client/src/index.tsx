@@ -1,5 +1,6 @@
 import React from 'react';
 import * as ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@emotion/react';
 import theme from './theme/theme';
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
-        <ProductListPage />
+        <BrowserRouter>
+          <ProductListPage />
+        </BrowserRouter>
       </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>

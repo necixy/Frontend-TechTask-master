@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const SidebarContainer = styled.div`
   grid-area: sidebar;
@@ -34,9 +35,9 @@ const Sidebar: React.FC<SidebarProps> = ({ categories }) => (
       <CategoryList>
         {categories.map(({ name, urlPath, id }, index) => (
           <CategoryListItem key={index}>
-            <a href={`/${urlPath}`}>
+            <Link to={`/${urlPath}`}>
               {name} (id: {id})
-            </a>
+            </Link>
           </CategoryListItem>
         ))}
       </CategoryList>
