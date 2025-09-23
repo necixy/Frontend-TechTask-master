@@ -6,7 +6,7 @@ import logoSvg from '../../assets/home-24-logo.svg';
 
 const HeaderContainer = styled.header`
   grid-area: header;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.backgroundAlt};
   display: flex;
   align-items: center;
   justify-content: space-between;

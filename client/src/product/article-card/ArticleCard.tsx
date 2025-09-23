@@ -5,15 +5,18 @@ import Button from '../../ui/button/Button';
 import { useTranslation } from 'react-i18next';
 
 const ArticleContainer = styled.div`
-  border: 1px solid lavenderblush;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+`;
 
-  & > * {
-    display: inline-block;
-    padding: 4px 0;
-    margin: 4px 0;
-    width: 100%;
-  }
+const ArticleImage = styled.img`
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 export const formatter = new Intl.NumberFormat('de-DE', {
@@ -26,7 +29,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
 
   return (
     <ArticleContainer>
-      <img src={article.images[0].path} alt={article.name} />
+      <ArticleImage src={article.images[0].path} alt={article.name} />
       <div>{article.name}</div>
       <div>{formatter.format(article.prices.regular.value / 100)}</div>
       <Button>{t('addToCart')}</Button>

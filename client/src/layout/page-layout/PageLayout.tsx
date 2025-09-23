@@ -5,15 +5,13 @@ import Footer from '../footer/Footer';
 
 const PageContainer = styled.div`
   display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 160px auto auto;
+  grid-template-columns: 240px 1fr 1fr;
   grid-template-areas:
     'header header header'
     'sidebar content content'
     'footer footer footer';
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.background};
-  padding-bottom: 30px;
 `;
 
 export type PageLayoutProps = {
