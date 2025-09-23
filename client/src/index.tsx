@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@emotion/react';
+import './i18n';
 import theme from './theme/theme';
 
 import './index.css';

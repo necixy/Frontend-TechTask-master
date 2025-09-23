@@ -13,6 +13,7 @@ const PageContainer = styled.div`
     'footer footer footer';
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.background};
+  padding-bottom: 30px;
 `;
 
 export type PageLayoutProps = {

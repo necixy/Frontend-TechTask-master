@@ -12,8 +12,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "graphql": "^16.11.0",
+    "i18next": "^25.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^15.7.3",
     "react-router-dom": "^7.9.1",
     "react-scripts": "5.0.1",
     "styled-system": "^5.1.5",
@@ -43,8 +45,8 @@
   "devDependencies": {
     "@types/jest": "^29.0.3",
     "@types/node": "^18.7.23",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
     "@types/styled-system": "^5.1.24"
   }
 }

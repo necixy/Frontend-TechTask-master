@@ -1,0 +1,8 @@
+{
+  "search": "Wonach suchst du?",
+  "categories": "Kategorien",
+  "addToCart": "In den Warenkorb",
+  "footerText": "Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und Versandkosten.",
+  "loading": "Lädt...",
+  "error": "Ein Fehler ist aufgetreten. {{message}}"
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import Input from '../../ui/input/Input';
+import ProductSearch from '../../product/product-search/ProductSearch';
 import logoSvg from '../../assets/home-24-logo.svg';
 
 const HeaderContainer = styled.header`
@@ -21,7 +21,7 @@ const Logo = styled.img`
 const Header: React.FC = () => (
   <HeaderContainer>
     <Logo src={logoSvg} alt="Logo" />
-    <Input placeholder={'Search'} />
+    <ProductSearch />
   </HeaderContainer>
 );
 
