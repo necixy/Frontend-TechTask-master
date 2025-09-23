@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ProductList from './ProductList';
+import ProductListPage from './ProductListPage';
 
-test('renders the ProductList', () => {
-  const { getByText } = render(<ProductList />);
+test('renders the ProductListPage', () => {
+  const { getByText } = render(<ProductListPage />);
   const linkElement = getByText(/home24/i);
   expect(linkElement).toBeInTheDocument();
 });

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from '../services/apollo/queries';
-import { Category, Article } from '../types';
+import { Category, Article } from '../types/types';
 
 interface GetCategoriesData {
   categories: Category[];

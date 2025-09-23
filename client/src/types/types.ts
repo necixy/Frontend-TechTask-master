@@ -1,3 +1,6 @@
+// Keeping all types in a single file for simplicity as it is a very small project,
+// can be split into multiple files if needed.
+
 export type Category = {
   name: string;
   categoryArticles: CategoryArticle;
