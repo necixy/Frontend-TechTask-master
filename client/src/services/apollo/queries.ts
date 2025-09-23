@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CATEGORIES = gql`
-  query GetCategories($ids: [String!]!, $first: Int!) {
+  query GetCategories($ids: [String!]!, $first: Int!, $offset: Int!) {
     categories: productLists(ids: $ids, locale: de_DE) {
       name
       articleCount
@@ -12,7 +12,7 @@ export const GET_CATEGORIES = gql`
           id
         }
       }
-      categoryArticles: articlesList(first: $first, offset: 0) {
+      categoryArticles: articlesList(first: $first, offset: $offset) {
         articles {
           name
           variantName

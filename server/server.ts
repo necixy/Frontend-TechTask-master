@@ -11,5 +11,7 @@ const proxy = createProxyMiddleware({
   logLevel: 'debug',
 });
 
-app.post('/graphql', cache('5 minutes'), proxy);
+// Disabled caching to make load more work.
+// app.post('/graphql', cache('5 minutes'), proxy);
+app.post('/graphql', proxy);
 app.listen(3001);

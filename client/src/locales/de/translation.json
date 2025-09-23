@@ -4,5 +4,6 @@
   "addToCart": "In den Warenkorb",
   "footerText": "Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und Versandkosten.",
   "loading": "Lädt...",
+  "loadMore": "Mehr laden",
   "error": "Ein Fehler ist aufgetreten. {{message}}"
 }
