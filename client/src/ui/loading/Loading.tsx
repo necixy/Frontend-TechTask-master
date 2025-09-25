@@ -10,7 +10,9 @@ const LoadingContainer = styled.div`
 const Loading: React.FC = () => {
   const { t } = useTranslation();
 
-  return <LoadingContainer>{t('loading')}</LoadingContainer>;
+  return (
+    <LoadingContainer data-testid="loading">{t('loading')}</LoadingContainer>
+  );
 };
 
 export default Loading;
